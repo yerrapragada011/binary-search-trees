@@ -23,7 +23,7 @@
         buildTree(array) {
           array = Array.from(new Set(array)).sort((a, b) => a - b)
 
-          function buildSubTree() {
+          const buildSubTree = () => {
             if (arr.length === 0) {
               return null
             }
