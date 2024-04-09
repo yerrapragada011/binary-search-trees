@@ -255,6 +255,25 @@
 
           return depthCounter - 1
         }
+
+        isBalanced() {
+          return this.checkBalanced(this.root)
+        }
+
+        checkBalanced(node) {
+          if (node === null) {
+            return true
+          }
+
+          const leftHeight = this.height(node.left)
+          const rightHeight = this.height(node.right)
+
+          if (Math.abs(leftHeight - rightHeight) > 1) {
+            return false
+          }
+
+          return this.checkBalanced(node.left) && this.checkBalanced(node.right)
+        }
       }
     </script>
   </body>
