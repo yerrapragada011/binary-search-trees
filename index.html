@@ -18,22 +18,22 @@
 
       class Tree {
         constructor(array) {
-          this.root = buildTree(array)
+          this.root = this.buildTree(array)
         }
 
         buildTree(array) {
           array = Array.from(new Set(array)).sort((a, b) => a - b)
 
-          const buildSubTree = () => {
-            if (array.length === 0) {
+          const buildSubTree = (arr) => {
+            if (arr.length === 0) {
               return null
             }
 
-            const midIndex = Math.floor(array.length / 2)
-            const rootNode = new Node(array[midIndex])
+            const midIndex = Math.floor(arr.length / 2)
+            const rootNode = new Node(arr[midIndex])
 
-            rootNode.left = buildSubTree(array.slice(0, midIndex))
-            rootNode.right = buildSubTree(array.slice(midIndex + 1))
+            rootNode.left = buildSubTree(arr.slice(0, midIndex))
+            rootNode.right = buildSubTree(arr.slice(midIndex + 1))
 
             return rootNode
           }
@@ -277,7 +277,7 @@
 
         rebalance() {
           const nodesArray = this.inOrder()
-          this.root = thiis.buildTree(nodesArray)
+          this.root = this.buildTree(nodesArray)
         }
       }
     </script>
