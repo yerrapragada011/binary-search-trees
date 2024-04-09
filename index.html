@@ -12,6 +12,7 @@
           this.data = data
           this.left = null
           this.right = null
+          this.parent = null
         }
       }
 
@@ -72,19 +73,23 @@
           let current = this.root
           let parent = null
 
-          while (current !== null) {
+          while (true) {
             parent = current
             if (value < current.data) {
               current = current.left
+              if (current === null) {
+                parent.left = newNode
+                newNode.parent = parent
+                return
+              }
             } else {
               current = current.right
+              if (current === null) {
+                parent.right = newNode
+                newNode.parent = parent
+                return
+              }
             }
-          }
-
-          if (value < parent.data) {
-            parent.left = newNode
-          } else {
-            parent.right = newNode
           }
         }
 
