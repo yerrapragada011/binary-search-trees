@@ -25,15 +25,15 @@
           array = Array.from(new Set(array)).sort((a, b) => a - b)
 
           const buildSubTree = () => {
-            if (arr.length === 0) {
+            if (array.length === 0) {
               return null
             }
 
-            const midIndex = Math.floor(arr.length / 2)
-            const rootNode = new Node(arr[midIndex])
+            const midIndex = Math.floor(array.length / 2)
+            const rootNode = new Node(array[midIndex])
 
-            rootNode.left = buildSubTree(arr.slice(o, midIndex))
-            rootNode.right = buildSubTree(arr.slice(midIndex + 1))
+            rootNode.left = buildSubTree(array.slice(0, midIndex))
+            rootNode.right = buildSubTree(array.slice(midIndex + 1))
 
             return rootNode
           }
@@ -273,6 +273,11 @@
           }
 
           return this.checkBalanced(node.left) && this.checkBalanced(node.right)
+        }
+
+        rebalance() {
+          const nodesArray = this.inOrder()
+          this.root = thiis.buildTree(nodesArray)
         }
       }
     </script>
