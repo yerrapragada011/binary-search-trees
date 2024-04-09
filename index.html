@@ -20,6 +20,26 @@
           this.root = buildTree(array)
         }
 
+        buildTree(array) {
+          array = Array.from(new Set(array)).sort((a, b) => a - b)
+
+          function buildSubTree() {
+            if (arr.length === 0) {
+              return null
+            }
+
+            const midIndex = Math.floor(arr.length / 2)
+            const rootNode = new Node(arr[midIndex])
+
+            rootNode.left = buildSubTree(arr.slice(o, midIndex))
+            rootNode.right = buildSubTree(arr.slice(midIndex + 1))
+
+            return rootNode
+          }
+
+          return buildSubTree(array)
+        }
+
         prettyPrint() {
           const printNode = (node, prefix = '', isLeft = true) => {
             if (node === null) {
@@ -37,29 +57,64 @@
               printNode(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true)
             }
           }
-          
+
           printNode(this.root)
         }
-      }
 
-      function buildTree(array) {
-        array = Array.from(new Set(array)).sort((a, b) => a - b)
+        insert(value) {
+          const newNode = new Node(value)
 
-        function buildSubTree() {
-          if (arr.length === 0) {
-            return null
+          if (this.root === null) {
+            this.root = newNode
+            return
           }
 
-          const midIndex = Math.floor(arr.length / 2)
-          const rootNode = new Node(arr[midIndex])
+          let current = this.root
+          let parent = null
 
-          rootNode.left = buildSubTree(arr.slice(o, midIndex))
-          rootNode.right = buildSubTree(arr.slice(midIndex + 1))
+          while (current !== null) {
+            parent = current
+            if (value < current.data) {
+              current = current.left
+            } else {
+              current = current.right
+            }
+          }
 
-          return rootNode
+          if (value < parent.data) {
+            parent.left = newNode
+          } else {
+            parent.right = newNode
+          }
         }
 
-        return buildSubTree(array)
+        deleteItem(value) {
+          const deleteNode = (node, value) => {
+            if (node === null) {
+              return null
+            }
+
+            if (value < node.data) {
+              node.left = deleteNode(node.left, value)
+            } else if (value > node.data) {
+              node.right = deleteNode(node.right, value)
+            } else {
+              if (node.left === null) {
+                return node.right
+              } else if (node.right === null) {
+                return node.left
+              }
+
+              let minRightNode = node.right
+              while (minRightNode.left !== null) {
+                minRightNode = minRightNode.left
+              }
+
+              node.data = minRightNode.data
+              node.right = deleteNode(node.right, minRightNode.data)
+            }
+          }
+        }
       }
     </script>
   </body>
