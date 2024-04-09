@@ -113,10 +113,29 @@
               node.data = minRightNode.data
               node.right = deleteNode(node.right, minRightNode.data)
             }
+
             return node
           }
+
           this.root = deleteNode(this.root, value)
         }
+
+        find(value) {
+          let current = this.root
+
+          while (current !== null) {
+            if (current.data === value) {
+              return current
+            } else if (value < current.data) {
+              current = current.left
+            } else {
+              current = current.right
+            }
+          }
+
+          return null
+        }
+        
       }
     </script>
   </body>
