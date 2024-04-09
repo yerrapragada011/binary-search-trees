@@ -135,7 +135,34 @@
 
           return null
         }
-        
+
+        levelOrder(callback) {
+          const result = []
+
+          const queue = [this.root]
+
+          while (queue.length > 0) {
+            const current = queue.shift()
+
+            if (callback) {
+              callback(current)
+            } else {
+              result.push(current.data)
+            }
+
+            if (current.left) {
+              queue.push(current.left)
+            }
+            if (current.right) {
+              queue.push(current.right)
+            }
+          }
+
+          if (!callback) {
+            return result
+          }
+        }
+
       }
     </script>
   </body>
