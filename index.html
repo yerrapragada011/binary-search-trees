@@ -163,6 +163,71 @@
           }
         }
 
+        inOrder(callback) {
+          const result = []
+
+          const traverse = (node) => {
+            if (node !== null) {
+              traverse(node.left)
+              if (callback) {
+                callback(node)
+              } else {
+                result.push(node.data)
+              }
+              traverse(node.right)
+            }
+          }
+
+          traverse(this.root)
+
+          if (!callback) {
+            return result
+          }
+        }
+
+        preOrder(callback) {
+          const result = []
+
+          const traverse = (node) => {
+            if (node !== null) {
+              if (callback) {
+                callback(node)
+              } else {
+                result.push(node.data)
+              }
+              traverse(node.left)
+              traverse(node.right)
+            }
+          }
+
+          traverse(this.root)
+
+          if (!callback) {
+            return result
+          }
+        }
+
+        postOrder(callback) {
+          const result = []
+
+          const traverse = (node) => {
+            if (node !== null) {
+              traverse(node.left)
+              traverse(node.right)
+              if (callback) {
+                callback(node)
+              } else {
+                result.push(node.data)
+              }
+            }
+          }
+
+          traverse(this.root)
+
+          if (!callback) {
+            return result
+          }
+        }
       }
     </script>
   </body>
