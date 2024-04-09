@@ -113,7 +113,9 @@
               node.data = minRightNode.data
               node.right = deleteNode(node.right, minRightNode.data)
             }
+            return node
           }
+          this.root = deleteNode(this.root, value)
         }
       }
     </script>
